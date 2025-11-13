@@ -14,10 +14,12 @@
 - [Context: Twiin as Framework](2-context-twiin.md)
 
 ### 3. Verifiable Credentials (VCs)
-- [3.1 Standards and Protocols](3-verifiable-credentials/3-1-standards-protocols.md)  
-- [3.2 PatientEnrollmentVC Example](3-verifiable-credentials/3-2-patientenrollmentvc-example.md)  
-- [3.3 HealthcareProviderVC Example](3-verifiable-credentials/3-3-healthcareprovidervc-example.md)  
-- [3.4 Credential Issuance Flow](3-verifiable-credentials/3-4-credential-issuance-flow.md)
+- [3.1 Standards and Protocols](3-verifiable-credentials/3-1-standards-protocols.md)
+- [3.2 HealthcareOrganizationVC Example](3-verifiable-credentials/3-2-healthcareorganizationvc-example.md)
+- [3.3 HealthcareProfessionalVC Example](3-verifiable-credentials/3-3-healthcareprofessionalvc-example.md)
+- [3.4 PatientEnrollmentVC Example](3-verifiable-credentials/3-4-patientenrollmentvc-example.md)
+- [3.5 DelegationVC Example](3-verifiable-credentials/3-5-delegationvc-example.md)
+- [3.6 Credential Issuance Flow](3-verifiable-credentials/3-6-credential-issuance-flow.md)
 
 ### 4. FHIR Usage
 - [FHIR Usage](4-fhir-usage.md)
