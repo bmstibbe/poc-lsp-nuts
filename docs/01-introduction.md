@@ -46,7 +46,7 @@ This approach ensures that trust, authorization, and interoperability
 remain consistent across the entire end-to-end exchange path, regardless
 of which party initiates the communication.
 
-![](./media/vc.jpg)
+![](./media/VC-plaatje.jpg)
 
 Objectives:
 
