@@ -2,7 +2,7 @@
 
 ## Overview
 
-- [Document Log](document-log.md)
+- [0. Document Log](0-document-log.md)
 - [Introduction](introduction.md)
 - [Twiin Context](twiin-context.md)
 - [Verifiable Credentials](vc-overview.md)
