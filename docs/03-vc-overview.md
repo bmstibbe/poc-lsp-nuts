@@ -2,141 +2,48 @@
 
 ## 3.1 Standards and Protocols
 
-+-------------+----------------------------+--------------------------+
-| **Domain**  | **Standard**               | **Description**          |
-+=============+============================+==========================+
-| VC Data     | W3C Verifiable Credentials | Defines structure,       |
-| Model       | Data Model v2.0            | semantics, and lifecycle |
-|             |                            | of credentials.          |
-|             |                            |                          |
-|             |                            | Link:                    |
-|             |                            | https://www.             |
-|             |                            | w3.org/TR/vc-data-model/ |
-+-------------+----------------------------+--------------------------+
-| JWT-VC      | W3C JWT-VC                 | We use the JWT-based     |
-| Rep         |                            | Verifiable Credential    |
-| resentation |                            | (VC-JWT) representation  |
-|             |                            | defined by the W3C       |
-|             |                            | Verifiable Credentials   |
-|             |                            | Data Model v1.1          |
-|             |                            | (03-03-2022).            |
-|             |                            |                          |
-|             |                            | Link:                    |
-|             |                            | https                    |
-|             |                            | ://www.w3.org/TR/vc-jwt/ |
-+-------------+----------------------------+--------------------------+
-| Issuance    | OpenID for Verifiable      | Credential request and   |
-| Protocol    | Credential Issuance        | issuance (issuer ↔       |
-|             | (OID4VCI)                  | holder (wallet))         |
-+-------------+----------------------------+--------------------------+
-| P           | W3C JWT-VP                 | Credential presentation  |
-| resentation |                            | from holder to verifier  |
-| Protocol    |                            |                          |
-|             |                            | Link:                    |
-|             |                            | https                    |
-|             |                            | ://www.w3.org/TR/vp-jwt/ |
-+-------------+----------------------------+--------------------------+
-| Digital     | RFC 7515 (JWS) / RFC 7518  | Cryptographic signing of |
-| Signature   | (algorithms)               | the JWT payload          |
-|             |                            | (RS256/ES256)            |
-+-------------+----------------------------+--------------------------+
+| **Domain**         | **Standard**                   | **Description** |
+|-------------------|--------------------------------|----------------|
+| VC Data Model      | W3C Verifiable Credentials Data Model v2.0 | Defines structure, semantics, and lifecycle of credentials. [Link](https://www.w3.org/TR/vc-data-model/) |
+| JWT-VC Representation | W3C JWT-VC                  | JWT-based Verifiable Credential representation defined by W3C VC Data Model v1.1 (03-03-2022). [Link](https://www.w3.org/TR/vc-jwt/) |
+| Issuance Protocol  | OpenID for Verifiable Credential Issuance (OID4VCI) | Credential request and issuance (issuer ↔ holder/wallet) |
+| Presentation Protocol | W3C JWT-VP                   | Credential presentation from holder to verifier. [Link](https://www.w3.org/TR/vp-jwt/) |
+| Digital Signature  | RFC 7515 (JWS) / RFC 7518 (algorithms) | Cryptographic signing of the JWT payload (RS256/ES256) |
 
-## 3.2 JWT-Based Verifiable Credentials and Presentations --- Fields, Meaning, and Example
+## 3.2 JWT-Based Verifiable Credentials and Presentations — Fields, Meaning, and Example
 
-A W3C **JWT-based Verifiable Credential (JWT-VC)** is a Verifiable
-Credential represented as a signed JSON Web Token (JWT) using the W3C
-Verifiable Credentials Data Model v2.0 and the JWS-based Data Integrity
-proof method.
+A W3C **JWT-based Verifiable Credential (JWT-VC)** is a Verifiable Credential represented as a signed JSON Web Token (JWT) using the W3C VC Data Model v2.0 and JWS-based Data Integrity proof method.  
 
-Unlike SD-JWT VC, the W3C JWT-VC format does **not** support selective
-disclosure and does **not** use hashed claim placeholders or disclosure
-bundles. All credential attributes are included directly and clearly
-within the JWT.
-
-The W3C specification defines:
-
--   Which fields must appear in the JWT header and payload,
-
--   How the vc object is structured (including \@context, type, and
-    credentialSubject),
-
--   How verifiers should validate signatures, timestamps, issuer
-    identifiers, and credential content.
+Unlike SD-JWT VC, the W3C JWT-VC format does **not** support selective disclosure. All credential attributes are included directly within the JWT.
 
 A JWT-VC consists of:
 
-1.  **A standard JWS header** (e.g., alg, typ, kid);
+1. **Standard JWS header** (alg, typ, kid)  
+2. **Standard JWT payload** (issuer, subject, timestamps, vc object)  
+3. **JWS signature** using the issuer's key  
 
-2.  **A standard JWT payload** containing the issuer, subject,
-    timestamps, and a vc object;
+### 3.2.1 JWT Header (JWS)
 
-3.  **A JWS signature** generated using the issuer's key referenced from
-    its DID document.
+| Field | Meaning | Example / Comment |
+|-------|---------|-----------------|
+| alg   | Cryptographic algorithm used to sign JWT | "RS256" |
+| typ   | Type of token | "JWT" |
+| kid   | Key identifier for signing key | "did:x509:0:sha256:WE4P5dd8DnLH...subject:O:OLVG%20Oost::san:otherName:2.16.528.1.1003.1.3.5.5.5:1-987654321-S-12345678-00.000-00000000" |
+| x5c   | Inline certificate chain for key validation (base64 DER) | Used in X.509-based VCs |
 
-This structure ensures interoperability, clarity of semantics, and
-compatibility with existing W3C VC holders, issuers, and verifiers
-without relying on IETF selective-disclosure mechanisms.
-
-### 3.2.1 JWT header (JWS)
-
-The header contains standard JOSE fields plus optional X.509 certificate
-references.
-
-+----+---------------------------+------------------------------------+
-| *  | **Meaning**               | **Example / Comment**              |
-| *F |                           |                                    |
-| ie |                           |                                    |
-| ld |                           |                                    |
-| ** |                           |                                    |
-+====+===========================+====================================+
-| a  | Cryptographic algorithm   | \"RS256\"                          |
-| lg | used to sign (or encrypt) |                                    |
-|    | the JWT                   |                                    |
-+----+---------------------------+------------------------------------+
-| t  | Type of token             | \"JWT\"                            |
-| yp |                           |                                    |
-+----+---------------------------+------------------------------------+
-| k  | Key identifier for the    | \"did:x509:0:sha256:WE4P5dd8DnLH   |
-| id | signing key. Required if  | SkyHaIjhp4udlkF9LqoKwCvu9gl38jk::s |
-|    | multiple keys exist;      | ubject:O:OLVG%20Oost::san:otherNam |
-|    | recommended to bind the   | e:2.16.528.1.1003.1.3.5.5.5:1-9876 |
-|    | VC to a specific          | 54321-S-12345678-00.000-00000000\" |
-|    | verification key.         |                                    |
-+----+---------------------------+------------------------------------+
-| x  |   ----------------------  | Inline certificate chain for key   |
-| 5c |   X.509 certificate       | validation. Used in X.509-based    |
-|    |   chain (base64 DER).     | Verifiable Credentials to include  |
-|    |   Used for signature      | the issuer's certificate chain for |
-|    |   verification in         | signature verification.            |
-|    |   X.509-based VCs         |                                    |
-|    |   ----------------------  |                                    |
-|    |                           |                                    |
-|    |   ----------------------  |                                    |
-+----+---------------------------+------------------------------------+
-
-Below is an example of an X509Credential issued by a did:x509. The code
-is a JWT header.
-
+**Example JSON Header:**
+```json
 {
-
-\"alg\": \"RS256\",
-
-\"typ\": \"JWT\",
-
-\"x5c\": \[
-
-\"MIID\...\<base64 DER of leaf-certificate \>\...\",
-
-\"MIID\...\<base64 DER of intermediate CA-certificate\>\...\",
-
-\"MIID\...\<base64 DER of root CA-certificate\>\...\"
-
-\],
-
-\"kid\":
-\"did:x509:0:sha256:WE4P5dd8DnLHSkyHaIjhp4udlkF9LqoKwCvu9gl38jk::subject:O:OLVG%20Oost::san:otherName:2.16.528.1.1003.1.3.5.5.5:1-987654321-S-12345678-00.000-00000000\"
-
+  "alg": "RS256",
+  "typ": "JWT",
+  "x5c": [
+    "MIID...<base64 DER leaf certificate>...",
+    "MIID...<base64 DER intermediate CA>...",
+    "MIID...<base64 DER root CA>..."
+  ],
+  "kid": "did:x509:0:sha256:WE4P5dd8DnLH...subject:O:OLVG%20Oost::san:otherName:2.16.528.1.1003.1.3.5.5.5:1-987654321-S-12345678-00.000-00000000"
 }
+
 
 The JWT Header contains the X.509 certificate chain and uses a SHA-256
 thumbprint as the Key ID of the leaf certificate.
@@ -148,56 +55,32 @@ W3C JWT-VC, including required and optional fields.
 
 **JWT Payload Field Table**
 
-  ----------------------------------------------------------------------------------------------------
-  **Field**   **Meaning**                          **Example / Comment**
-  ----------- ------------------------------------ ---------------------------------------------------
-  iss         Identifier of the issuer (typically  \"iss\": \"did:\<method\>:xxxxx\"
-              a DID).                              
+| Field   | Meaning                                             | Example / Comment |
+|---------|----------------------------------------------------|-----------------|
+| `iss`   | Identifier of the issuer (usually a DID)          | `"iss": "did:<method>:xxxxx"` |
+| `sub`   | Identifier of the subject to whom the credential refers | `"sub": "did:web:healthcare.example"` |
+| `jti`   | Unique identifier for the credential (JWT ID)     | `"jti": "urn:uuid:123e4567-e89b-12d3-a456-426614174000"` |
+| `iat`   | Issued-at timestamp (seconds since epoch)         | `"iat": 1730876100"` |
+| `nbf`   | Not-before timestamp; credential is valid from this moment | `"nbf": 1730876100"` |
+| `exp`   | Expiration timestamp; credential should not be accepted after this | `"exp": 1762412100"` |
+| `vc`    | Verifiable Credential object including W3C fields (`@context`, `type`, `credentialSubject`) | See structure below |
 
-  sub         Identifier of the subject the        \"sub\": \"did:web:zorginstelling.example\"
-              credential refers to.                
+---
 
-  jti         Unique identifier for the credential \"jti\":
-              (JWT ID).                            \"urn:uuid:123e4567-e89b-12d3-a456-426614174000\"
 
-  iat         Issued-at timestamp (seconds since   \"iat\": 1730876100
-              epoch).                              
-
-  nbf         Not-before timestamp; credential     \"nbf\": 1730876100
-              becomes valid at this time.          
-
-  exp         Expiration timestamp; credential     \"exp\": 1762412100
-              must not be accepted after this      
-              time.                                
-
-  vc          The Verifiable Credential object     Full structure shown below
-              containing the W3C fields (@context, 
-              type, credentialSubject).            
-  ----------------------------------------------------------------------------------------------------
 
 ### 3.2.3 The VC Object Structure (W3C-Compliant)
 
 The vc object always contains:
 
-  ----------------------------------------------------------------------------------------------
-  **Field**           **Meaning**                 **Example / Comment**
-  ------------------- --------------------------- ----------------------------------------------
-  \@context           Defines semantics and       \"@context\":
-                      vocabulary for interpreting \[\"https://www.w3.org/ns/credentials/v2\"\]
-                      the credential.             
+| Field               | Meaning                                                         | Example / Comment |
+|--------------------|-----------------------------------------------------------------|-----------------|
+| `@context`         | Defines the semantics and vocabulary for interpreting the credential | `["@context": "https://www.w3.org/ns/credentials/v2"]` |
+| `type`             | Array defining the credential type; must include `VerifiableCredential` | `["VerifiableCredential", "HealthcareOrganizationCredential"]` |
+| `credentialSubject`| Domain-specific attributes of the subject. No sensitive identifiers such as BSN | `{ "organizationName": "OLVG", "uraNumber": "12345678", "authorizationRole": "practitioner" }` |
 
-  type                An array defining the       \"type\": \[\"VerifiableCredential\",
-                      credential type(s). Must    \"HealthcareOrganizationVC\"\]
-                      include                     
-                      \"VerifiableCredential\".   
+---
 
-  credentialSubject   The domain-specific         The credentialSubject.id is optional according
-                      attributes about the        to W3C. It MUST NOT contain sensitive
-                      subject of the credential.  identifiers such as a BSN. Other attributes
-                                                  (e.g., organizationName, uraNumber,
-                                                  authorizationRole) may be included depending
-                                                  on the credential type.
-  ----------------------------------------------------------------------------------------------
 
 ### 3.2.4 Media type
 
@@ -270,47 +153,24 @@ trust anchor.
 
 -   sanOtherName --- derived from UZI Private Server Certificate
 
+```json
 {
-
-\"iss\":
-\"did:x509:0:sha256:WE4P5dd8DnLHSkyHaIjhp4udlkF9LqoKwCvu9gl38jk::subject:O:
-Zorginstelling%20Example::san:otherName:2.16.528.1.1003.1.3.5.5.5:1-987654321-S-12345678-00.000-00000000\",
-
-\"sub\": \"did:web:zorginstelling.example\",
-
-\"iat\": 1731379200,
-
-\"nbf\": 1731379200,
-
-\"exp\": 1762915200,
-
-\"jti\": \"urn:uuid:0d1600bb-4e9b-4d89-b77f-002ff1c1a9ad\",
-
-\"vc\": {
-
-\"@context\": \[
-
-\"https://www.w3.org/2018/credentials/v1\"
-
-\],
-
-\"type\": \[\"VerifiableCredential\", \"X509Credential\"\],
-
-\"credentialSubject\": {
-
-\"id\": \"did:web:zorginstelling.example\",
-
-\"subject:O\": \"Zorginstelling Example\",
-
-\"healthcareOrganizationId\": \"12345678\",
-
-\"san:otherName\":
-\"2.16.528.1.1003.1.3.5.5.5:1-987654321-S-12345678-00.000-00000000\"
-
-}
-
-}
-
+  "iss": "did:x509:0:sha256:WE4P5dd8DnLHSkyHaIjhp...::subject:O:Healthcare%20Example::san:otherName:2.16.528.1.1003.1.3.5.5.5:1-987654321-S-12345678-00.000-00000000",
+  "sub": "did:web:healthcare.example",
+  "iat": 1731379200,
+  "nbf": 1731379200,
+  "exp": 1762915200,
+  "jti": "urn:uuid:0d1600bb-4e9b-4d89-b77f-002ff1c1a9ad",
+  "vc": {
+    "@context": ["https://www.w3.org/2018/credentials/v1"],
+    "type": ["VerifiableCredential", "X509Credential"],
+    "credentialSubject": {
+      "id": "did:web:healthcare.example",
+      "organizationName": "Healthcare Example",
+      "healthcareOrganizationId": "12345678",
+      "san:otherName": "2.16.528.1.1003.1.3.5.5.5:1-987654321-S-12345678-00.000-00000000"
+    }
+  }
 }
 
 **Note**: \"san:otherName\"
