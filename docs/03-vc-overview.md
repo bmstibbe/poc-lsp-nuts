@@ -43,7 +43,7 @@ A JWT-VC consists of:
   ],
   "kid": "did:x509:0:sha256:WE4P5dd8DnLH...subject:O:OLVG%20Oost::san:otherName:2.16.528.1.1003.1.3.5.5.5:1-987654321-S-12345678-00.000-00000000"
 }
-
+```
 
 The JWT Header contains the X.509 certificate chain and uses a SHA-256
 thumbprint as the Key ID of the leaf certificate.
