@@ -21,9 +21,6 @@ There are **two distinct GtKs** involved:
     -- Translates external requests into the proper internal Nuts
     protocols and resource formats.
 
-```{=html}
-<!-- -->
-```
 2.  **GtK-AORTA**\
     -- Provides the standardized entry point into the LSP/AORTA
     infrastructure.\
@@ -49,7 +46,7 @@ This approach ensures that trust, authorization, and interoperability
 remain consistent across the entire end-to-end exchange path, regardless
 of which party initiates the communication.
 
-![](media/image1.png){width="6.295833333333333in" height="3.54375in"}
+![](./media/vc.jpg)
 
 Objectives:
 
