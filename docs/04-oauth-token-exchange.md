@@ -25,30 +25,28 @@ It is **not** placed in an HTTP header.
 
 Example request from RFC 7523 --- JWT Bearer Token Request:
 
+```http
 POST /token
-
 Content-Type: application/x-www-form-urlencoded
 
-grant_type= urn:ietf:params:oauth:grant-type:jwt-bearer
-
-assertion=\<JWT\>
-
-client_id=\<GtK-id\>
+grant_type=urn:ietf:params:oauth:grant-type:jwt-bearer&
+assertion=<JWT>&
+client_id=<GtK-id>
+```
 
 *Formally, RFC 7523 does **not** explicitly support exchanging arbitrary
 token types (such as VCs and VPs). RFC 8693 does allow this.*
 
 Example request from RFC 8693:
 
+```http
 POST /token
-
 Content-Type: application/x-www-form-urlencoded
 
 grant_type=urn:ietf:params:oauth:grant-type:token-exchange
-
 subject_token=\<JWT\>
-
 subject_token_type=urn:ietf:params:oauth:token-type:jwt
+```
 
 Replace \<JWT\> with a JWT-encoded Verifiable Presentation.
 
