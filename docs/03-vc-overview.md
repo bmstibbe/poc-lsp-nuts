@@ -4,10 +4,10 @@
 
 | **Domain**         | **Standard**                   | **Description** |
 |-------------------|--------------------------------|----------------|
-| VC Data Model      | W3C Verifiable Credentials Data Model v2.0 | Defines structure, semantics, and lifecycle of credentials. [Link](https://www.w3.org/TR/vc-data-model/) |
-| JWT-VC Representation | W3C JWT-VC                  | JWT-based Verifiable Credential representation defined by W3C VC Data Model v1.1 (03-03-2022). [Link](https://www.w3.org/TR/vc-jwt/) |
+| VC Data Model      | W3C Verifiable Credentials Data Model v2.0 | Defines structure, semantics, and lifecycle of credentials. [vc-data-model](https://www.w3.org/TR/vc-data-model/) |
+| JWT-VC Representation | W3C JWT-VC                  | JWT-based Verifiable Credential representation defined by W3C VC Data Model v1.1 (03-03-2022). [vc-jwt/](https://www.w3.org/TR/vc-jwt/) |
 | Issuance Protocol  | OpenID for Verifiable Credential Issuance (OID4VCI) | Credential request and issuance (issuer ↔ holder/wallet) |
-| Presentation Protocol | W3C JWT-VP                   | Credential presentation from holder to verifier. [Link](https://www.w3.org/TR/vp-jwt/) |
+| Presentation Protocol | W3C JWT-VP                   | Credential presentation from holder to verifier. [vp-jwt](https://www.w3.org/TR/vp-jwt/) |
 | Digital Signature  | RFC 7515 (JWS) / RFC 7518 (algorithms) | Cryptographic signing of the JWT payload (RS256/ES256) |
 
 ## 3.2 JWT-Based Verifiable Credentials and Presentations — Fields, Meaning, and Example
@@ -172,6 +172,7 @@ trust anchor.
     }
   }
 }
+```
 
 **Note**: \"san:otherName\"
 
@@ -197,9 +198,6 @@ structure: \<OID_CA\>:\<Subject_ID\>
     -   For the UZI Register Server CA, this is:
         **2.16.528.1.1003.1.3.5.5.5**
 
-```{=html}
-<!-- -->
-```
 -   \<Subject_ID\> is a unique identifier within the TSP domain. The UZI
     register defines it to include multiple numbers that have meaning
     within the healthcare sector and uniquely identify the subject as a
@@ -252,68 +250,33 @@ CA) and the signer are linked through the leaf certificate.
 
 -   sanOtherName --- derived from UZI-register Zorgverlener Certificate
 
+```json
 {
-
-\"iss\":
-\"did:x509:0:sha256:WE4P5dd8DnLHSkyHaIjhp4udlkF9LqoKwCvu9gl38jk::subject:O:
-Zorginstelling%20Example::san:otherName:2.16.528.1.1003.1.3.5.5.3:1-886654321-M-12345678-00.000-00000000\",
-
-\"sub\": \"did:uuid:33b859cb-1f68-4051-b767-246b9fc2e129\",
-
-\"iat\": 1730876000,
-
-\"nbf\": 1730876100,
-
-\"exp\": 1762412100,
-
-\"jti\": \"urn:uuid:32fb679f-1875-4a78-b8be-27e13f40ef49\",
-
-\"vc\": {
-
-\"@context\": \[
-
-\"<https://www.w3.org/ns/credentials/v1>\"
-
-\],
-
-\"type\": \[
-
-\"VerifiableCredential\",
-
-\"X509Credential\"
-
-\],
-
-\"credentialSubject\": {
-
-\"id\": \"did:uuid:33b859cb-1f68-4051-b767-246b9fc2e129\",
-
-\"patientId\": \" bsn:87654321\",
-
-\"verification\": {
-
-\"registeredBy\": {
-
-\"healthcareOrganizationId\": \"12345678\"
-
-},
-
-\"verifiedAt\": \"2025-11-20T09:52:12Z\",
-
-\"method\": \"in-person-identity-check\",
-
-\"evidence\": \"passport-or-national-id-card\",
-
-\"san:otherName\": \"2.16.528.1.1003.1.3.5.5.5:1-
-886654321-M-12345678-00.000-00000000\"
-
+  "iss": "did:x509:0:sha256:WE4P5dd8DnLHSkyHaIjhp4udlkF9LqoKwCvu9gl38jk::subject:O:Zorginstelling%20Example::san:otherName:2.16.528.1.1003.1.3.5.5.3:1-886654321-M-12345678-00.000-00000000",
+  "sub": "did:uuid:33b859cb-1f68-4051-b767-246b9fc2e129",
+  "iat": 1730876000,
+  "nbf": 1730876100,
+  "exp": 1762412100,
+  "jti": "urn:uuid:32fb679f-1875-4a78-b8be-27e13f40ef49\",
+  "vc": {
+    "@context": ["<https://www.w3.org/ns/credentials/v1>"],
+    "type": ["VerifiableCredential","X509Credential"],
+    "credentialSubject": {
+      "id": "did:uuid:33b859cb-1f68-4051-b767-246b9fc2e129",
+      "patientId": "bsn:87654321",
+      "verification": {
+        "registeredBy": {
+          "healthcareOrganizationId": "12345678"
+        },
+        "verifiedAt": "2025-11-20T09:52:12Z",
+        "method": "in-person-identity-check",
+        "evidence": "passport-or-national-id-card",
+        "san:otherName": "2.16.528.1.1003.1.3.5.5.5:1-886654321-M-12345678-00.000-00000000"
+      }
+    }
+  }  
 }
-
-}
-
-}
-
-}
+```
 
 The PatientEnrollmentVC is signed with the UZI-Pas certificate of the
 Healthcare Provider (UZI-register Zorgverlener/Medewerker op naam CA G3)
@@ -342,66 +305,32 @@ signer are linked through the leaf certificate.
 -   san:otherName - A structured, internal identifier derived from the
     UZI-register or certificate.
 
+```json
 {
-
-\"iss\":
-\"did:x509:0:sha256:WE4P5dd8DnLHSkyHaIjhp4udlkF9LqoKwCvu9gl38jk::subject:O:
+  "iss":
+  "did:x509:0:sha256:WE4P5dd8DnLHSkyHaIjhp4udlkF9LqoKwCvu9gl38jk::subject:O:
 Zorginstelling%20Example::san:otherName:2.16.528.1.1003.1.3.5.5.3:1-882354372-Z-12345678-01.015-00000000\",
-
-\"sub\": \"did:web:gtk.1234\",
-
-\"iat\": 1541493724,
-
-\"nbf\": 1541493724,
-
-\"exp\": 1573029723,
-
-\"jti\": \"urn:uuid:9877e792-d51b-46a1-9d37-c748e531c57a\",
-
-\"vc\": {
-
-\"@context\": \[
-
-\"https://www.w3.org/ns/credentials/v1\"
-
-\],
-
-\"type\": \[
-
-\"VerifiableCredential\",
-
-\"X509Credential\"
-
-\],
-
-\"credentialSubject\": {
-
-\"id\": \"did:web:gtk.1234\",
-
-\"autorisatieregel::context\": \[
-
-\"https://goedbeheerdziekenhuis/autorisatieregels/medicatiecontext/v2\"
-
-\],
-
-\"grantedBy\": {
-
-\"personId\": \"did:uzi:882354372\",
-
-\"roleCode\": \"01.015\",
-
-\"uraNumber\": \"12345678\"
-
-},
-
-\"san:otherName\":
-\"2.16.528.1.1003.1.3.5.5.5:1-882354372-Z-12345678-01.015-00000000\"
-
+  "sub": "did:web:gtk.1234",
+  "iat": 1541493724,
+  "nbf": 1541493724,
+  "exp": 1573029723,
+  "jti": "urn:uuid:9877e792-d51b-46a1-9d37-c748e531c57a",
+  "vc": {
+    "@context": ["https://www.w3.org/ns/credentials/v1"],
+    "type": ["VerifiableCredential","X509Credential"],
+    "credentialSubject": {
+      "id": "did:web:gtk.1234",
+      "autorisatieregel::context": ["https://goedbeheerdziekenhuis/autorisatieregels/medicatiecontext/v2"],
+      "grantedBy": {
+        "personId": "did:uzi:882354372",
+        "roleCode": "01.015",
+        "uraNumber": "12345678"
+      },
+      "san:otherName":"2.16.528.1.1003.1.3.5.5.5:1-882354372-Z-12345678-01.015-00000000"
+    }
+  }
 }
-
-}
-
-}
+```
 
 The MandateVC is signed with the UZI-Pas certificate of the Healthcare
 Provider (UZI-Pas Zorgverlener CA G3) with algorithm: RSA-256.
@@ -422,79 +351,45 @@ A W3C JWT Verifiable Presentation (JWT-VP) is a cryptographically signed
 object that presents one or more Verifiable Credentials (VCs) to a
 verifier. Using JWT allows standard cryptographic validation.
 
-  -----------------------------------------------------------------------------------
-  **Field**   **Meaning**                                  **Example / Comment**
-  ----------- -------------------------------------------- --------------------------
-  iss         Issuer of the VP; usually the holder         \"did:web:gtk.1234\"
-              presenting the credentials.                  
-
-  aud         Audience; the verifier intended to receive   \"did:web:gtk:lsp:1235\"
-              the VP.                                      
-
-  iat         Issued At; timestamp when VP was created.    1700300000
-
-  nbf         Not Before; VP should not be considered      1700300000
-              valid before this time.                      
-
-  exp         Expiration; optional but recommended to      1700386400
-              limit validity.                              
-
-  jti         JWT ID; unique identifier for the VP.        \"vp-12345\"
-  -----------------------------------------------------------------------------------
+ | **Field** | **Meaning** | **Example / Comment** |
+|-----------|-------------|------------------------|
+| `iss` | Issuer of the VP; usually the holder presenting the credentials. | `"did:web:gtk.1234"` |
+| `aud` | Audience; the verifier intended to receive the VP. | `"did:web:gtk:lsp:1235"` |
+| `iat` | Issued At; timestamp when VP was created. | `1700300000` |
+| `nbf` | Not Before; VP should not be considered valid before this time. | `1700300000` |
+| `exp` | Expiration; optional but recommended to limit validity. | `1700386400` |
+| `jti` | JWT ID; unique identifier for the VP. | `"vp-12345"` |
 
 ### 3.4.1 VP-specific Claims
 
-  -----------------------------------------------------------------------------------------------------------
-  **Field**                 **Meaning**                    **Example / Comment**
-  ------------------------- ------------------------------ --------------------------------------------------
-  vp                        Main object containing the     { \"type\": \[\"VerifiablePresentation\"\],
-                            presentation data.             \"verifiableCredential\": \[\...\] }
-
-  vp.type                   Type of the presentation       \[\"VerifiablePresentation\"\]
-                            (always includes               
-                            \"VerifiablePresentation\").   
-
-  vp.verifiableCredential   Array of embedded VCs(JWT-VCs) \[\"eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9\...\"\]
-
-  nonce                     Used to prevent replay attacks \"1234567890\"
-                            in some protocols.             
-  -----------------------------------------------------------------------------------------------------------
+  | **Field** | **Meaning** | **Example / Comment** |
+|-----------|-------------|------------------------|
+| `vp` | Main object containing the presentation data. | `{ "type": ["VerifiablePresentation"], "verifiableCredential": [...] }` |
+| `vp.type` | Type of the presentation (always includes `"VerifiablePresentation"`). | `["VerifiablePresentation"]` |
+| `vp.verifiableCredential` | Array of embedded VCs (JWT-VCs). | `["eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9..."]` |
+| `nonce` | Used to prevent replay attacks in some protocols. | `"1234567890"` |
 
 ## 3.5 JWT-VP Example
 
+```json
 {
-
-\"iss\": \"did:web:gtk.1234\",
-
-\"jti\": \"urn:uuid:3978344f-8596-4c3a-a978-8fcaba3903c5\",
-
-\"aud\": \"http://as.verifier.example\",
-
-\"nbf\": 1541493724,
-
-\"iat\": 1541493724,
-
-\"exp\": 1573029723,
-
-\"nonce\": \"343s\$FSFDa-\",
-
-\"vp\": {
-
-\"type\": \[\"VerifiablePresentation\"\],
-
-\"verifiableCredential\": \[
-
-\"base64(HealthcareOrganizationVC)\",
-
-\"base64(PatientEnrollmentVC)\",
-
-\"base64(MandateVC)\"
-
-\]
-
+  "iss": "did:web:gtk.1234",
+  "jti": "urn:uuid:3978344f-8596-4c3a-a978-8fcaba3903c5",
+  "aud": "http://as.verifier.example",
+  "nbf": 1541493724,
+  "iat": 1541493724,
+  "exp": 1573029723,
+  "nonce": "343s$FSFDa-",
+  "vp": {
+    "type": ["VerifiablePresentation"],
+    "verifiableCredential": [
+      "base64(HealthcareOrganizationVC)",
+      "base64(PatientEnrollmentVC)",
+      "base64(MandateVC)"
+    ]
+  }
 }
-
-}
+```
 
 The VP is signed with the web certificate of ZORG-ID with algorithm:
 RSA-256.
@@ -534,51 +429,31 @@ This document specifies:
 
 Example:
 
+```json
 {
-
-\"credential_issuer\": \"https://issuer.zorgid.example\",
-
-\"credentials_supported\": \[
-
-{
-
-\"id\": \"HealthcareOrganizationVC\",
-
-\"format\": \"jwt_vc_json\",
-
-\"cryptographic_binding_methods_supported\": \[\"did:x509\", \"x5c\"\],
-
-\"cryptographic_suites_supported\": \[\"RS256\", \"ES256\"\]
-
-},
-
-{
-
-\"id\": \"PatientEnrollmentVC\",
-
-\"format\": \"jwt_vc_json\",
-
-\"cryptographic_binding_methods_supported\": \[\"did:x509\", \"x5c\"\],
-
-\"cryptographic_suites_supported\": \[\"RS256\", \"ES256\"\]
-
-},
-
-{
-
-\"id\": \"MandateVC\",
-
-\"format\": \"jwt_vc_json\",
-
-\"cryptographic_binding_methods_supported\": \[\"did:x509\", \"x5c\"\],
-
-\"cryptographic_suites_supported\": \[\"RS256\", \"ES256\"\]
-
+  "credential_issuer": "https://issuer.zorgid.example",
+  "credentials_supported": [
+    {
+      "id": "HealthcareOrganizationVC",
+      "format": "jwt_vc_json",
+      "cryptographic_binding_methods_supported": ["did:x509", "x5c"],
+      "cryptographic_suites_supported": ["RS256", "ES256"]
+    },
+    {
+      "id": "PatientEnrollmentVC",
+      "format": "jwt_vc_json",
+      "cryptographic_binding_methods_supported": ["did:x509", "x5c"],
+      "cryptographic_suites_supported": ["RS256", "ES256"]
+    },
+    {
+      "id": "MandateVC",
+      "format": "jwt_vc_json",
+      "cryptographic_binding_methods_supported": ["did:x509", "x5c"],
+      "cryptographic_suites_supported": ["RS256", "ES256"]
+    }
+  ]
 }
-
-\]
-
-}
+```
 
 **Key points:**
 
@@ -596,29 +471,20 @@ support multiple credential types under the same issuer URL.
 
 ### 3.6.2 Verifiable Credential Request
 
+```http
 POST /credential/request HTTP/1.1
-
 Host: issuer.zorgid.example
-
 Content-Type: application/json
-
-Authorization: Bearer \<access_token\>
+Authorization: Bearer <access_token>
 
 {
-
-\"type\": \"urn:nl:vc:\<XYZ\>VC\",
-
-\"format\": \"jwt_vc_json\",
-
-\"credentialSubject\": {
-
-\"id\": \"did:xyz:234567821\",
-
-...
-
+  "type": "urn:nl:vc:<XYZ>VC",
+  "format": "jwt_vc_json",
+  "credentialSubject": {
+    "id": "did:xyz:234567821"
+  }
 }
-
-}
+```
 
 **Notes**
 
