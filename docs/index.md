@@ -1,8 +1,14 @@
-# Nuts–LSP PoC Documentation
+# Nuts–LSP PoC Documentation (Draft version:0.0.6)
+
+## Introduction
+This documentation is not yet complete and is still being converted into a Markdown format.
+For the most current official version, please refer to the PDF:
+
+- [Core. PoC II Nuts-LSP](PoC%20II%20Nuts-LSP.pdf)
 
 ## Overview
 
-- [Core. PoC II Nuts-LSP](PoC%20II%20Nuts-LSP.pdf)
+
 - [0.  Document Log](00-document-log.md)
 - [1.  Introduction](01-introduction.md)
 - [2.  Twiin Context](02-twiin-context.md)
