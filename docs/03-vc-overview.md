@@ -2,13 +2,17 @@
 
 ## 3.1 Standards and Protocols
 
-| **Domain**         | **Standard**                   | **Description** |
-|-------------------|--------------------------------|----------------|
-| VC Data Model      | W3C Verifiable Credentials Data Model v2.0 | Defines structure, semantics, and lifecycle of credentials. [vc-data-model](https://www.w3.org/TR/vc-data-model/) |
-| JWT-VC Representation | W3C JWT-VC                  | JWT-based Verifiable Credential representation defined by W3C VC Data Model v1.1 (03-03-2022). [vc-jwt/](https://www.w3.org/TR/vc-jwt/) |
-| Issuance Protocol  | OpenID for Verifiable Credential Issuance (OID4VCI) | Credential request and issuance (issuer ↔ holder/wallet) |
-| Presentation Protocol | W3C JWT-VP                   | Credential presentation from holder to verifier. [vp-jwt](https://www.w3.org/TR/vp-jwt/) |
-| Digital Signature  | RFC 7515 (JWS) / RFC 7518 (algorithms) | Cryptographic signing of the JWT payload (RS256/ES256) |
+| **Domain**                 | **Standard**                                           | **Description**                                                                                                                                          |
+|---------------------------|---------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------|
+| VC Data Model             | W3C Verifiable Credentials Data Model v2.0             | Defines structure, semantics, and lifecycle of credentials. <br>Link: https://www.w3.org/TR/vc-data-model/                                              |
+| JWT-VC Representation     | W3C JWT-VC                                              | We use the JWT-based Verifiable Credential (VC-JWT) representation defined by the W3C Verifiable Credentials Data Model v1.1 (03-03-2022). <br>Link: https://www.w3.org/TR/vc-jwt/ |
+| Issuance Protocol         | Out of scope: OID4VCI                                  | Credential request and issuance (issuer ↔ holder (wallet))                                                                                               |
+| Presentation Protocol     | Profile on RFC 7523                                     | Credential presentation from holder to verifier. <br>Link: https://build.fhir.org/ig/nuts-foundation/nl-generic-functions-ig/branches/authentication/GFI-004.html |
+| Decentralized Identifiers | W3C DID v1.0                                            | Decentralized Identifiers (DIDs) are a type of identifier for verifiable, decentralized digital identity. <br>Link: https://www.w3.org/TR/2022/REC-did-core-20220719/ |
+| did:x509                  | did:x509 DID method                                     | A working draft for the specification for the did:x509 DID method. <br>Link: https://trustoverip.github.io/tswg-did-x509-method-specification           |
+| did:web                   | did:web DID method                                      | DID method to resolve public keys using the DNS system secured by TLS. <br>Link: https://w3c-ccg.github.io/did-method-web/                              |
+| Digital Signature         | RFC 7515 (JWS) / RFC 7518 (algorithms)                 | Cryptographic signing of the JWT payload (RS256/ES256)                                                                                                   |
+
 
 ## 3.2 JWT-Based Verifiable Credentials and Presentations — Fields, Meaning, and Example
 
@@ -45,8 +49,9 @@ A JWT-VC consists of:
 }
 ```
 
-The JWT Header contains the X.509 certificate chain and uses a SHA-256
-thumbprint as the Key ID of the leaf certificate.
+The JWT Header contains the X.509 certificate chain and uses a SHA-256 thumbprint as the Key ID of the intermediate CA. Pinning to an intermediate CA means you explicitly bind the did:x509 to that intermediate certificate’s fingerprint and you must update the DID whenever the intermediate CA changes or expires. See also the specification in https://trustoverip.github.io/tswg-did-x509-method-specification/#operations. 
+
+**Note:** The did:x509 method allows you to pin either to an intermediate CA or to the root CA. Pinning to the intermediate CA provides a tighter binding but results in shorter DID lifetimes, because the DID must be updated whenever the intermediate certificate rolls over or expires. Pinning to the root CA creates a more stable DID, as root certificates have long validity periods and intermediate certificates can change over time without requiring a DID update. In all cases, standard X.509 path validation still applies: the leaf certificate, all intermediates, and the root must form a valid chain at the time of verification. 
 
 ### 3.2.2 JWT Payload Fields for VC\'s (W3C JWT-VC)
 
@@ -257,7 +262,7 @@ CA) and the signer are linked through the leaf certificate.
   "iat": 1730876000,
   "nbf": 1730876100,
   "exp": 1762412100,
-  "jti": "urn:uuid:32fb679f-1875-4a78-b8be-27e13f40ef49\",
+  "jti": "urn:uuid:32fb679f-1875-4a78-b8be-27e13f40ef49",
   "vc": {
     "@context": ["<https://www.w3.org/ns/credentials/v1>"],
     "type": ["VerifiableCredential","X509Credential"],
@@ -309,7 +314,7 @@ signer are linked through the leaf certificate.
 {
   "iss":
   "did:x509:0:sha256:WE4P5dd8DnLHSkyHaIjhp4udlkF9LqoKwCvu9gl38jk::subject:O:
-Zorginstelling%20Example::san:otherName:2.16.528.1.1003.1.3.5.5.3:1-882354372-Z-12345678-01.015-00000000\",
+Zorginstelling%20Example::san:otherName:2.16.528.1.1003.1.3.5.5.3:1-882354372-Z-12345678-01.015-00000000",
   "sub": "did:web:gtk.1234",
   "iat": 1541493724,
   "nbf": 1541493724,
