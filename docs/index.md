@@ -14,3 +14,4 @@
 - [9.  Use Cases](09-use-cases.md)
 - [10. Other Notes](10-other-notes.md)
 - [11. Summary](11-summary.md)
+- [Ref. PoC II Nuts-LSP](PoC II Nuts-LSP.pdf)
