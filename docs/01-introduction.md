@@ -48,6 +48,20 @@ of which party initiates the communication.
 
 ![](/media/VC-plaatje.jpg)
 
+![](/media/VC-Nuts-Voorstel.jpg)
+
+The diagram shows how Verifiable Credentials flow from UZI certificates, through the AET SDK and the Nuts Node, into the GtK (Gevalideerd Twiin Knooppunt), where they are validated and used for authorization. 
+
+-   The **AET SDK** issues three VCs based on UZI server and person certificates. 
+
+-   The **Nuts Node** links these credentials to the organization’s decentralized identifier (did:ZI) and makes them available for cross-domain use. 
+
+-   The **GtK** receives these VCs, combines them with X.509-based organizational credentials, and applies the Twiin trust and authorization rules. 
+
+-   A **Verifier** validates the final Verifiable Presentation and issues an Access Token that applications can use to access LSP/AORTA services. 
+
+In short, the diagram illustrates the trust chain from UZI certificates to VCs, through the Nuts and GtK infrastructure, ending in a verifiable authorization decision for healthcare applications. 
+
 Objectives:
 
 -   Ensure interoperability with existing holders, issuers, and
