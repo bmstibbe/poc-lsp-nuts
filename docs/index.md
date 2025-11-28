@@ -2,6 +2,7 @@
 
 ## Overview
 
+- [Core. PoC II Nuts-LSP](PoC%20II%20Nuts-LSP.pdf)
 - [0.  Document Log](00-document-log.md)
 - [1.  Introduction](01-introduction.md)
 - [2.  Twiin Context](02-twiin-context.md)
@@ -14,5 +15,5 @@
 - [9.  Use Cases](09-use-cases.md)
 - [10. Other Notes](10-other-notes.md)
 - [11. Summary](11-summary.md)
-- [Ref. PoC II Nuts-LSP](PoC%20II%20Nuts-LSP.pdf)
+
 
