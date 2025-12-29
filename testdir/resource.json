@@ -1,0 +1,10 @@
+{
+  "myElement": {
+    "type": "string",
+    "description": "Element vanuit GitHub, referentie via $ref"
+  },
+  "anotherElement": {
+    "type": "integer",
+    "description": "Nog een element in het remote bestand"
+  }
+}
