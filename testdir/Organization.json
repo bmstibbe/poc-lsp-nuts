@@ -14,7 +14,8 @@
           "items": {
             "type": "string",
             "format": "uri"
-          }
+          },
+		  "example": "https://simplifier.net/zorg-ab/nl-core-organization-zorg-ab" 
         }
       }
     },
@@ -26,16 +27,19 @@
         "properties": {
           "system": {
             "type": "string",
-            "format": "uri"
+            "format": "uri",
+			"example": "http://fhir.nl/fhir/NamingSystem/ura"
           },
           "value": {
-            "type": "string"
+            "type": "string",
+			"example": "987654321"
           }
         }
       }
     },
     "name": {
-      "type": "string"
+      "type": "string",
+	  "example": "Zorgaanbieder XYZ"
     },
     "active": {
       "type": "boolean",
