@@ -38,7 +38,11 @@
       "type": "string"
     },
     "active": {
-      "type": "boolean"
-    }
+      "type": "boolean",
+	  "example" : true
+    },
+	"remoteElement": {
+		"$ref": "https://raw.githubusercontent.com/bmstibbe/poc-lsp-nuts/refs/heads/main/testdir/resource.json#/myElement"
+	}
   }
 }
