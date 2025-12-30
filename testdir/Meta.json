@@ -13,7 +13,7 @@
       "source": {
         "type": "string",
         "format": "uri",
-        "example": "http://fhir.nl/fhir/NamingSystem/ura"
+        "example": "https://www.vektis.nl/"
       },
       "profile": {
         "type": "array",
