@@ -6,7 +6,7 @@
       "type": "string",
       "enum": ["Organization"]
     },
-    {
+    "meta": {
       "$ref": "https://raw.githubusercontent.com/bmstibbe/poc-lsp-nuts/refs/heads/main/testdir/Meta.json" 
     },
     "identifier": {
