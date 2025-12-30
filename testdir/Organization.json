@@ -26,6 +26,12 @@
       "type": "string",
       "example": "Zorgaanbieder XYZ"
     },
+	"alias": {
+		"type": "array",
+	     "items": {
+			"type": "string"
+		 }
+	},
     "active": {
       "type": "boolean",
       "example": true
