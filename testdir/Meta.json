@@ -1,14 +1,9 @@
 {
   "type": "object",
   "required": [
-    "id",
     "meta"
   ],
   "properties": {
-    "id": {
-      "type": "string",
-      "example": "abcd123"
-    },
     "meta": {
       "type": "object",
       "required": [
