@@ -19,21 +19,7 @@
       "type": "array",
       "items": {
         "type": "object",
-        "required": [
-          "system",
-          "value"
-        ],
-        "properties": {
-          "system": {
-            "type": "string",
-            "format": "uri",
-            "example": "http://fhir.nl/fhir/NamingSystem/ura"
-          },
-          "value": {
-            "type": "string",
-            "example": "987654321"
-          }
-        }
+		"$ref": "https://raw.githubusercontent.com/bmstibbe/poc-lsp-nuts/refs/heads/main/testdir/Identifier.json#/identifier"
       }
     },
     "name": {
