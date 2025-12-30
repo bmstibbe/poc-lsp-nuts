@@ -7,17 +7,7 @@
       "enum": ["Organization"]
     },
     "meta": {
-      "type": "object",
-      "properties": {
-        "profile": {
-          "type": "array",
-          "items": {
-            "type": "string",
-            "format": "uri"
-          },
-		  "example": "https://simplifier.net/zorg-ab/nl-core-organization-zorg-ab" 
-        }
-      }
+      "$ref": "https://raw.githubusercontent.com/bmstibbe/poc-lsp-nuts/refs/heads/main/testdir/Meta.json" 
     },
     "identifier": {
       "type": "array",
@@ -44,9 +34,6 @@
     "active": {
       "type": "boolean",
 	  "example" : true
-    },
-	"remoteElement": {
-		"$ref": "https://raw.githubusercontent.com/bmstibbe/poc-lsp-nuts/refs/heads/main/testdir/resource.json#/myElement"
-	}
+    }
   }
 }
