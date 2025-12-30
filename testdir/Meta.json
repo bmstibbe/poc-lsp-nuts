@@ -1,8 +1,7 @@
 {
   "type": "object",
   "properties": {
-  
-  "meta": {
+    "meta": {
       "type": "object",
       "required": [
         "lastUpdated"
