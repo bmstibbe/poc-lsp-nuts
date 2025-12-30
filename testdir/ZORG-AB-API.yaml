@@ -1,4 +1,4 @@
-openapi: 3.0.4
+openapi: 3.1.0
 info:
   title: ZORG-AB FHIR API
   version: 1.0.0
@@ -53,10 +53,12 @@ components:
       properties:
         resourceType:
           type: string
-          example: Bundle
+          examples: 
+          - resourceType: Bundle
         type:
           type: string
-          example: searchset
+          examples: 
+          - type: searchset
         entry:
           type: array
           items:

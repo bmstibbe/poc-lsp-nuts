@@ -1,0 +1,29 @@
+{
+  "identifier": {
+    "type": "object",
+    "properties": {
+      "use": {
+        "type": "string",
+        "enum": [
+          "usual",
+          "official",
+          "temp",
+          "secondary",
+          "old"
+        ]
+      },
+      "type": {
+        "type": "string"
+      },
+      "system": {
+        "type": "string",
+        "format": "uri",
+        "example": "http://fhir.nl/fhir/NamingSystem/ura"
+      },
+      "value": {
+        "type": "string",
+        "example": "987654321"
+      }
+    }
+  }
+}
