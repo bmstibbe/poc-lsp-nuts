@@ -12,7 +12,8 @@
       ]
     },
     "meta": {
-      "$ref": "https://raw.githubusercontent.com/bmstibbe/poc-lsp-nuts/refs/heads/main/testdir/Meta.json"
+	  "type": "object",
+      "$ref": "https://raw.githubusercontent.com/bmstibbe/poc-lsp-nuts/refs/heads/main/testdir/Meta.json#/meta"
     },
     "identifier": {
       "type": "array",
