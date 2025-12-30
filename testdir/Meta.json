@@ -1,34 +1,25 @@
 {
-  "type": "object",
-  "properties": {
-    "meta": {
-      "type": "object",
-      "required": [
-        "lastUpdated"
-      ],
-      "properties": {
-        "versionId": {
-          "type": "string",
-          "example": "v2"
-        },
-        "lastUpdated": {
-          "type": "string",
-          "format": "date-time"
-        },
-        "source": {
-          "type": "string",
-          "format": "uri",
-          "example": "http://fhir.nl/fhir/NamingSystem/ura"
-        },
-        "profile": {
-          "type": "array",
-          "items": {
-            "type": "string",
-            "format": "uri"
-          },
-          "example": "https://simplifier.net/zorg-ab/nl-core-organization-zorg-ab"
-        }
-      }
+  "meta": {
+    "versionId": {
+      "type": "string",
+      "example": "v2"
+    },
+    "lastUpdated": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "source": {
+      "type": "string",
+      "format": "uri",
+      "example": "http://fhir.nl/fhir/NamingSystem/ura"
+    },
+    "profile": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "format": "uri"
+      },
+      "example": "https://simplifier.net/zorg-ab/nl-core-organization-zorg-ab"
     }
   }
 }
