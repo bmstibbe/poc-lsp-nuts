@@ -1,0 +1,106 @@
+{
+  "openapi" : "3.1.0",
+  "info" : {
+    "title" : "ZORG-AB FHIR API",
+    "version" : "0.0.1"
+  },
+  "servers" : [ {
+    "url" : "https://api.zorg-ab.nl/fhir"
+  } ],
+  "paths" : {
+    "/Organization" : {
+      "get" : {
+        "summary" : "Search Organizations",
+        "description" : "Returns Organization resources conforming to the ZORG-AB Organization profile.\n",
+        "parameters" : [ {
+          "name" : "identifier",
+          "in" : "query",
+          "description" : "Search by identifier (e.g. AGB, URA)",
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "FHIR Bundle with Organization resources",
+            "content" : {
+              "application/fhir+json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/FHIRBundle"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Organization/{id}" : {
+      "get" : {
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Status 200",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "https://raw.githubusercontent.com/bmstibbe/poc-lsp-nuts/refs/heads/main/testdir/Organization.json"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Status 404"
+          }
+        }
+      }
+    }
+  },
+  "components" : {
+    "schemas" : {
+      "FHIRBundle" : {
+        "type" : "object",
+        "required" : [ "resourceType", "entry" ],
+        "properties" : {
+          "resourceType" : {
+            "type" : "string",
+            "examples" : [ {
+              "resourceType" : "Bundle"
+            } ]
+          },
+          "type" : {
+            "type" : "string",
+            "examples" : [ {
+              "type" : "searchset"
+            } ]
+          },
+          "entry" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/BundleEntry"
+            }
+          }
+        }
+      },
+      "BundleEntry" : {
+        "type" : "object",
+        "properties" : {
+          "resource" : {
+            "oneOf" : [ {
+              "$ref" : "#/components/schemas/Organization"
+            } ]
+          }
+        }
+      },
+      "Organization" : {
+        "$ref" : "https://raw.githubusercontent.com/bmstibbe/poc-lsp-nuts/refs/heads/main/testdir/Organization.json"
+      }
+    }
+  }
+}
