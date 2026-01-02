@@ -3,7 +3,25 @@
 	"description": "Representation of an Organization. It will be used as the discriminating value.",
 	"allOf":[
 	{
-	"$ref": "https://raw.githubusercontent.com/bmstibbe/poc-lsp-nuts/refs/heads/main/testdir/Resource.json#/Resource"	
+	 "type": "object",
+    "discriminator": {
+      "propertyName": "resourceType"
+    },
+    "properties": {
+      "resourceType": {
+        "type": "string"
+      },
+      "id": {
+        "type": "string"
+      },
+      "meta": {
+        "$ref": "#/meta"
+      }
+    },
+    "required": [
+      "resourceType",
+      "meta"
+    ]
 	},
     "type": "object",
     "required": [
