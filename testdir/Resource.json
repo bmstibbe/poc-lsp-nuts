@@ -6,7 +6,8 @@
     },
     "properties": {
       "resourceType": {
-        "type": "string"
+        "type": "string",
+		"example": "Organization",
       },
       "id": {
         "type": "string"

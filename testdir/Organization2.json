@@ -11,12 +11,6 @@
       "identifier"
     ],
     "properties": {
-      "resourceType": {
-        "type": "string",
-        "enum": [
-          "Organization"
-        ]
-      },
       "identifier": {
         "type": "array",
         "items": {
