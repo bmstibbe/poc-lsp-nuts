@@ -1,6 +1,6 @@
 {
   "Organization": {
-	"description": "Representation of an Organization. `Organization` will be used as the discriminating value.",
+	"description": "Representation of an Organization. It will be used as the discriminating value.",
 	"allOf":[
 	{
 	"$ref": "https://raw.githubusercontent.com/bmstibbe/poc-lsp-nuts/refs/heads/main/testdir/Resource.json#/Resource"	
