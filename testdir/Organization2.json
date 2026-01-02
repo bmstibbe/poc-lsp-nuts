@@ -1,5 +1,11 @@
 {
   "Organization": {
+	"description": "Representation of an Organization. `Organization` will be used as the discriminating value.",
+	"allOf":[
+	{
+	"$ref": "https://raw.githubusercontent.com/bmstibbe/poc-lsp-nuts/refs/heads/main/testdir/Resource.json#/Organization"	
+	},
+	{
     "type": "object",
     "required": [
       "resourceType",
@@ -11,10 +17,6 @@
         "enum": [
           "Organization"
         ]
-      },
-      "meta": {
-        "type": "object",
-        "$ref": "https://raw.githubusercontent.com/bmstibbe/poc-lsp-nuts/refs/heads/main/testdir/Meta.json#/meta"
       },
       "identifier": {
         "type": "array",
@@ -39,4 +41,5 @@
       }
     }
   }
+  ]
 }
