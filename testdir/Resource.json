@@ -1,0 +1,49 @@
+{
+  "Resource": {
+    "type": "object",
+    "discriminator": {
+      "propertyName": "resourceType"
+    },
+    "properties": {
+      "resourceType": {
+        "type": "string"
+      },
+      "id": {
+        "type": "string"
+      },
+      "meta": {
+        "$ref": "#/meta"
+      }
+    },
+    "required": [
+      "resourceType",
+      "meta"
+    ]
+  },
+  "meta": {
+    "type": "object",
+    "properties": {
+      "versionId": {
+        "type": "string",
+        "example": "v2"
+      },
+      "lastUpdated": {
+        "type": "string",
+        "format": "date-time"
+      },
+      "source": {
+        "type": "string",
+        "format": "uri",
+        "example": "https://www.vektis.nl/"
+      },
+      "profile": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "format": "uri"
+        },
+        "example": "https://simplifier.net/zorg-ab/nl-core-organization-zorg-ab"
+      }
+    }
+  }
+}

@@ -1,42 +1,42 @@
 {
-	"Organization": {
-  "type": "object",
-  "required": [
-    "resourceType",
-    "identifier"
-  ],
-  "properties": {
-    "resourceType": {
-      "type": "string",
-      "enum": [
-        "Organization"
-      ]
-    },
-    "meta": {
-      "type": "object",
-      "$ref": "https://raw.githubusercontent.com/bmstibbe/poc-lsp-nuts/refs/heads/main/testdir/Meta.json#/meta"
-    },
-    "identifier": {
-      "type": "array",
-      "items": {
+  "Organization": {
+    "type": "object",
+    "required": [
+      "resourceType",
+      "identifier"
+    ],
+    "properties": {
+      "resourceType": {
+        "type": "string",
+        "enum": [
+          "Organization"
+        ]
+      },
+      "meta": {
         "type": "object",
-		"$ref": "https://raw.githubusercontent.com/bmstibbe/poc-lsp-nuts/refs/heads/main/testdir/Identifier.json#/identifier"
+        "$ref": "https://raw.githubusercontent.com/bmstibbe/poc-lsp-nuts/refs/heads/main/testdir/Meta.json#/meta"
+      },
+      "identifier": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "$ref": "https://raw.githubusercontent.com/bmstibbe/poc-lsp-nuts/refs/heads/main/testdir/Identifier.json#/identifier"
+        }
+      },
+      "name": {
+        "type": "string",
+        "example": "Zorgaanbieder XYZ"
+      },
+      "alias": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "active": {
+        "type": "boolean",
+        "example": true
       }
-    },
-    "name": {
-      "type": "string",
-      "example": "Zorgaanbieder XYZ"
-    },
-	"alias": {
-		"type": "array",
-	     "items": {
-			"type": "string"
-		 }
-	},
-    "active": {
-      "type": "boolean",
-      "example": true
     }
   }
-}
 }
