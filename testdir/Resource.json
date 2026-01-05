@@ -12,7 +12,7 @@
         "type": "string"
       },
       "meta": {
-        "$ref": "#/meta2"
+        "$ref": "#/Meta"
       }
     },
     "required": [
@@ -20,7 +20,7 @@
       "meta"
     ]
   },
-  "meta2": {
+  "Meta": {
     "type": "object",
     "properties": {
       "versionId": {
