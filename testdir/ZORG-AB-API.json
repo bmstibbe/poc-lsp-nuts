@@ -50,7 +50,25 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "https://raw.githubusercontent.com/bmstibbe/poc-lsp-nuts/refs/heads/main/testdir/Organization.json"
+                  "$ref" : "https://raw.githubusercontent.com/bmstibbe/poc-lsp-nuts/refs/heads/main/testdir/Organization2.json#/Organization"
+                },
+                "examples" : {
+                  "Organization" : {
+                    "summary": "OrganizationABC",
+                    "value": {
+                      "resourceType" : "Organization",
+                      "id" : "987654331",
+                      "meta" : {
+                        "versionId" : "v3",
+                        "source" : "https://www.vektis.nl/",
+                        "profile" : "https://simplifier.net/zorg-ab/nl-core-organization-zorg-ab"
+                      },
+                      "name" : "Ziekenhuis ABC",
+                      "alias": ["Ziekenhuis andere naam"],
+                      "active" : true,
+                      "abc" : "test"
+                    }
+                  }
                 }
               }
             }
